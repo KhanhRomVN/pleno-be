@@ -30,6 +30,9 @@ public class AuthController {
         String email = loginRequest.get("email");
         String password = loginRequest.get("password");
 
+        System.out.println("Email: " + email);
+        System.out.println("Password: " + password);
+
         User user = userService.findByEmail(email);
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
             String accessToken = jwtUtil.generateToken(user.getId());
