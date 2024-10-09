@@ -56,7 +56,13 @@ public class AuthController {
         String password = registerRequest.get("password");
         String username = registerRequest.get("username");
 
-        userService.registerUser(fullName, email, password, username);
-        return ResponseEntity.ok("User registered successfully");
+        try {
+            userService.registerUser(fullName, email, password, username);
+            return ResponseEntity.ok("User registered successfully");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Registration failed: " + e.getMessage());
+        }
     }
 }
+
+
